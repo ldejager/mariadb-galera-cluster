@@ -1,0 +1,39 @@
+#cloud-config
+
+package_upgrade: true
+
+bootcmd:
+  - setenforce 0
+  - timedatectl set-timezone UTC
+
+runcmd:
+  - fallocate -l 2G /swapfile;chmod 600 /swapfile;mkswap /swapfile;swapon /swapfile;sh -c 'echo "/swapfile none swap sw 0 0" >> /etc/fstab';
+
+manage-resolv-conf: true
+resolv_conf:
+  nameservers:
+    - '8.8.4.4'
+    - '8.8.8.8'
+    - '209.244.0.3'
+
+yum_repos:
+  mariadb:
+    baseurl: http://yum.mariadb.org/10.1/centos7-amd64/
+    enabled: true
+    gpgcheck: true
+    gpgkey: https://yum.mariadb.org/RPM-GPG-KEY-MariaDB
+
+packages:
+  - vim
+  - wget
+  - git
+  - lsof
+  - telnet
+  - screen
+  - sysstat
+  - rsync
+  - bash-completion
+  - socat
+  - MariaDB-server
+  - MariaDB-client
+  - bind-utils

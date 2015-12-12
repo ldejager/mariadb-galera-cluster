@@ -30,20 +30,16 @@ The steps below can be used to get started.
 ```shell
 git clone git@github.com:ldejager/terraform-mariadb-cluster.git
 ```
-
 2. Change into the repository directory
 ```shell
 cd terraform-mariadb-cluster
 ```
-
 3. Copy the sample digitalocean terraform file to `terraform.tf`
 ```shell
 cp providers/digitalocean.sample.tf terraform.tf
 ```
 4. Provide your token and check that the SSH key path is correct in `terraform.tf`
-
 5. Review the provided `cloud-config.yml` file and make any amendments if required.
-
 6. Run terraform get to download and update the required modules.
 ```shell
 terraform get
@@ -52,10 +48,13 @@ terraform get
 ```shell
 terraform plan
 ```
-
 8. If you are satisfied with what terraform is going to do, run the `apply` step below.
 ```shell
 terraform apply
 ```
 
 Once the hosts have been installed, you will need to manually configure MariaDB clustering. As mentioned above, this document and repository is work in progress so as time goes on, these tasks will be added into ansible playbooks for ease of consumption.
+
+**TODO**
+
+Document and provide sample MariaDB Galera clustering configuration.

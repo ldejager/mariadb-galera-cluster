@@ -1,0 +1,10 @@
+---
+- name: configure members of wheel group for passwordless sudo
+  sudo: yes
+  lineinfile:
+    dest: /etc/sudoers
+    regexp: "^%wheel"
+    line: "%wheel ALL=(ALL) NOPASSWD: ALL"
+    state: present
+  tags:
+    - users

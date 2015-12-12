@@ -1,0 +1,80 @@
+---
+- name: set timezone to etc/utc
+  sudo: yes
+  file:
+    src: /usr/share/zoneinfo/Etc/UTC
+    dest: /etc/localtime
+    state: link
+    force: yes
+
+- name: configure hosts file
+  sudo: yes
+  template:
+    src: hosts.j2
+    dest: /etc/hosts
+    mode: 644
+  tags:
+    - common
+
+- name: install common packages
+  sudo: yes
+  yum:
+    name: "{{ item }}"
+    state: latest
+  with_items:
+    - vim
+    - nc
+    - git
+    - unzip
+    - lsof
+    - screen
+    - telnet
+    - wget
+    - sysstat
+    - rsync
+    - socat
+    - bash-completion
+    - bind-utils
+  tags:
+    - bootstrap
+
+- name: disable firewalld
+  sudo: yes
+  service:
+    name: firewalld
+    enabled: false
+    state: stopped
+  register: command_result
+  failed_when: "command_result|failed and 'No such file or directory' not in command_result.msg"
+
+- name: enable EPEL repo
+  sudo: yes
+  yum:
+    name: epel-release
+    state: latest
+
+- name: Allocate swap
+  command: |
+    fallocate -l {{ swap_size }} {{ swap_location }} creates={{ swap_location }}
+  register: allocate_swap
+  when: swap_size != false
+
+- name: Set permissions
+  file: path={{ swap_location }} mode=600
+  when: swap_size != false
+
+- name: Setup swap
+  command: mkswap {{ swap_location }}
+  register: setup_swap
+  when: swap_size != false and allocate_swap.changed
+
+- name: Enable swap
+  command: swapon {{ swap_location }}
+  when: swap_size != false and allocate_swap.changed
+
+- name: Add swap to /etc/fstab
+  lineinfile: dest=/etc/fstab line="{{ swap_location }}   none    swap    sw    0   0" state=present
+  when: swap_size != false
+
+- include: users.yml
+- include: mariadb.yml

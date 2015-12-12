@@ -14,7 +14,11 @@ The following list of providers are supported.
 
 **WORK IN PROGRESS**
 
-This document is still a work in progress and will be updated as progress is made. The following defaults exist in the terraform manifests:
+This document is still a work in progress and will be updated as progress is made.
+
+### Digital Ocean
+
+The following defaults exist in the terraform manifests for the Digital Ocean provisioner.
 
 ```
 variable cluster_member_count { default = 3 }
@@ -53,7 +57,26 @@ terraform plan
 terraform apply
 ```
 
-Once the hosts have been installed, you will need to manually configure MariaDB clustering. As mentioned above, this document and repository is work in progress so as time goes on, these tasks will be added into ansible playbooks for ease of consumption.
+Once the hosts have been created on Digital Ocean, you will need to run the ansible playbooks to install the common packages as well as the MariaDB server and client software.
+
+:exclamation: The ansible run process depends on `terraform-inventory` which can be obtained from the URL below.
+
+https://github.com/adammck/terraform-inventory
+
+- To test the connectivity to the newly deployed hosts, run the ansible ping module.
+```shell
+ansible all --private-key ~/.ssh/terraform -i ~/bin/terraform-inventory -m ping
+db-01 | success >> {
+    "changed": false,
+    "ping": "pong"
+}
+```
+
+- If all looks good, proceed to run the ansible playbooks.
+```shell
+ansible-playbook -u root --private-key ~/.ssh/terraform -i ~/bin/terraform-inventory provisioning/terraform.yml
+```
+
 
 **TODO**
 

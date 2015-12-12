@@ -26,29 +26,29 @@ If you wish to override any of these, set the variable in the `terraform.tf` fil
 
 The steps below can be used to get started.
 
-1. Clone the repository
+- Clone the repository
 ```shell
 git clone git@github.com:ldejager/terraform-mariadb-cluster.git
 ```
-2. Change into the repository directory
+- Change into the repository directory
 ```shell
 cd terraform-mariadb-cluster
 ```
-3. Copy the sample digitalocean terraform file to `terraform.tf`
+- Copy the sample digitalocean terraform file to `terraform.tf`
 ```shell
 cp providers/digitalocean.sample.tf terraform.tf
 ```
-4. Provide your token and check that the SSH key path is correct in `terraform.tf`
-5. Review the provided `cloud-config.yml` file and make any amendments if required.
-6. Run terraform get to download and update the required modules.
+- Provide your token and check that the SSH key path is correct in `terraform.tf`
+- Review the provided `cloud-config.yml` file and make any amendments if required.
+- Run terraform get to download and update the required modules.
 ```shell
 terraform get
 ```
-7. Run terraform plan and review the output.
+- Run terraform plan and review the output.
 ```shell
 terraform plan
 ```
-8. If you are satisfied with what terraform is going to do, run the `apply` step below.
+- If you are satisfied with what terraform is going to do, run the `apply` step below.
 ```shell
 terraform apply
 ```

@@ -1,0 +1,17 @@
+---
+- name: Misc - Create hosts file
+  lineinfile: dest=/etc/hosts line='{{ hostvars[item].ansible_default_ipv4.address }} {{ hostvars[item].ansible_hostname }}' state=present backup=yes
+  when: hostvars[item].ansible_default_ipv4.address is defined
+  with_items: groups['all']
+
+- name: Misc - Disable firewalld
+  sudo: yes
+  service:
+    name: firewalld
+    enabled: false
+    state: stopped
+  register: command_result
+  failed_when: "command_result|failed and 'No such file or directory' not in command_result.msg"
+
+- name: Misc - Upgrade all packages
+  yum: name=* state=latest

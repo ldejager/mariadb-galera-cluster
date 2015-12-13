@@ -1,10 +1,5 @@
 ---
-- name: install mariadb repo
-  copy: src=mariadb.repo
-        dest=/etc/yum.repos.d/
-        owner=root group=root mode=0644
-
-- name: install mariadb server and client
+- name: MariaDB - Install mariadb server and client
   sudo: yes
   yum:
     name: "{{ item }}"

@@ -1,5 +1,5 @@
 ---
-- name: configure members of wheel group for passwordless sudo
+- name: Users - Configure members of wheel group for passwordless sudo
   sudo: yes
   lineinfile:
     dest: /etc/sudoers

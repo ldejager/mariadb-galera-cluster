@@ -1,0 +1,7 @@
+# {{ ansible_managed }}
+{% for nameserver in nameservers %}
+nameserver {{nameserver}}
+{% endfor %}
+{% if search_domain is defined %}
+search {% for name in search_domain %}{{name}} {% endfor %}
+{% endif %}

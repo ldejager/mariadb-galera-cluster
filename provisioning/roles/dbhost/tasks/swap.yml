@@ -1,0 +1,23 @@
+---
+- name: Swap - Allocate swap
+  command: |
+    fallocate -l {{ swap_size }} {{ swap_location }} creates={{ swap_location }}
+  register: allocate_swap
+  when: swap_size != false
+
+- name: Swap - Set permissions
+  file: path={{ swap_location }} mode=600
+  when: swap_size != false
+
+- name: Swap - Setup swap
+  command: mkswap {{ swap_location }}
+  register: setup_swap
+  when: swap_size != false and allocate_swap.changed
+
+- name: Swap -Enable swap
+  command: swapon {{ swap_location }}
+  when: swap_size != false and allocate_swap.changed
+
+- name: Swap -Add swap to /etc/fstab
+  lineinfile: dest=/etc/fstab line="{{ swap_location }}   none    swap    sw    0   0" state=present
+  when: swap_size != false

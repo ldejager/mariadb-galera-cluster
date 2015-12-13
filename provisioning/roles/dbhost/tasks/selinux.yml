@@ -1,0 +1,8 @@
+---
+- name: Selinux - Install libselinux-python package
+  yum: name=libselinux-python state=present
+  tags: selinux
+
+- name: Selinux - Set SELinux policy and state
+  selinux: state=disabled
+  tags: selinux

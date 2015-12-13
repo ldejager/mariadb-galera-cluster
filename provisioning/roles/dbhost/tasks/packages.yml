@@ -1,0 +1,22 @@
+---
+- name: Packages - Install common packages
+  sudo: yes
+  yum:
+    name: "{{ item }}"
+    state: latest
+  with_items:
+    - vim
+    - nc
+    - git
+    - unzip
+    - lsof
+    - screen
+    - telnet
+    - wget
+    - sysstat
+    - rsync
+    - socat
+    - bash-completion
+    - bind-utils
+  tags:
+    - bootstrap

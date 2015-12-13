@@ -12,7 +12,6 @@ resource "digitalocean_droplet" "db" {
   region = "${var.region_name}"
   size = "${var.cluster_memory_size}"
   ssh_keys = ["${var.ssh_key}"]
-  user_data = "${file("cloud-config.yml")}"
 }
 
 output "cluster_ip_addresses" {

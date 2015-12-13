@@ -1,8 +1,6 @@
 # MariaDB Cluster
 
-MariaDB Galera Cluster deployment with `terraform` for automated infrastructure provisioning and `cloud-config` and `ansible` for software deployments.
-
-:exclamation: The cloud config will with time be translated into ansible playbooks. See the contribution document if you'd like to contribute.
+MariaDB Galera Cluster deployment with `terraform` for automated infrastructure provisioning and `ansible` for software deployments.
 
 The following list of providers are supported.
 
@@ -63,6 +61,8 @@ Once the hosts have been created on Digital Ocean, you will need to run the ansi
 
 https://github.com/adammck/terraform-inventory
 
+Review the configuration in `ansible.cfg`, specifically the path to the SSH key you've used in terraform.
+
 - To test the connectivity to the newly deployed hosts, run the ansible ping module.
 ```shell
 ansible all --private-key ~/.ssh/terraform -i ~/bin/terraform-inventory -m ping
@@ -74,7 +74,7 @@ db-01 | success >> {
 
 - If all looks good, proceed to run the ansible playbooks.
 ```shell
-ansible-playbook -u root --private-key ~/.ssh/terraform -i ~/bin/terraform-inventory provisioning/terraform.yml
+ansible-playbook -i ~/bin/terraform-inventory provisioning/terraform.yml
 ```
 
 

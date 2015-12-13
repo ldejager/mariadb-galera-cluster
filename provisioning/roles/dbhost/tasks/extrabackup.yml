@@ -1,0 +1,13 @@
+---
+- name: Percona - Install Percona repo
+  yum: name=http://www.percona.com/downloads/percona-release/redhat/0.1-3/percona-release-0.1-3.noarch.rpm state=present
+
+- name: Percona - Install xtrabackup
+  sudo: yes
+  yum:
+    name: "{{ item }}"
+    state: latest
+  with_items:
+    - percona-xtrabackup-22
+  tags:
+    - percona

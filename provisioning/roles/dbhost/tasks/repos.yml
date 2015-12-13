@@ -9,3 +9,4 @@
   copy: src=mariadb.repo
         dest=/etc/yum.repos.d/
         owner=root group=root mode=0644
+

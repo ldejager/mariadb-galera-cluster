@@ -9,3 +9,11 @@
     - MariaDB-client
   tags:
     - mariadb
+
+- name: MariaDB - Install server configuration file
+  when: hostvars[item].ansible_default_ipv4.address is defined
+  template: src=server.conf.j2 dest=/etc/my.cnf.d/server.cnf
+  with_items: groups['all']
+
+- name: MariaDB - Enable MariaDB Service
+  service: name=mysqld enabled=yes state=stopped

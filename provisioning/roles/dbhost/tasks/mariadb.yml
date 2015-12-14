@@ -10,6 +10,32 @@
   tags:
     - mariadb
 
+- name: MariaDB - Enable MariaDB Service
+  service: name=mysqld state=started
+
+- name: MariaDB - Create setup scripts directory
+  file: path=/root/setup_scripts state=directory mode=0755
+
+- name: MariaDB - Copy secure_mariadb_install script
+  template: src=secure_mariadb.sh.j2 dest=/root/setup_scripts/secure_mariadb_install.sh mode=0755
+
+- name: MariaDB - Check if secure_mariadb_install has already been executed
+  stat: path=/root/.secure_mariadb_install.completed
+  register: secure_mariadb_install_completed
+
+- name: MariaDB - Execute secure_mariadb_install if not already executed
+  command: sh /root/setup_scripts/secure_mariadb_install.sh
+  when: secure_mariadb_install_completed.stat.exists == False
+
+- name: MariaDB - Copy user .my.cnf file with root passwd credentials
+  template: src=client_my.cnf.j2 dest=/root/.my.cnf owner=root group=root mode=0600
+
+- name: MariaDB - Copy sst_auth setup script
+  template: src=setup_sst_auth.sql.j2 dest=/root/setup_scripts/setup_sst_auth.sql mode=0755
+
+- name: MariaDB - Execute sst_auth_setup script
+  command: mysql < /root/setup_scripts/setup_sst_auth.sql
+
 - name: MariaDB - Install server configuration file
   when: hostvars[item].ansible_default_ipv4.address is defined
   template: src=server.conf.j2 dest=/etc/my.cnf.d/server.cnf
@@ -17,3 +43,4 @@
 
 - name: MariaDB - Enable MariaDB Service
   service: name=mysqld enabled=yes state=stopped
+

@@ -1,0 +1,3 @@
+GRANT USAGE ON *.* to {{wsrep_sst_username  }}@'%' IDENTIFIED BY '{{ wsrep_sst_password }}';
+GRANT ALL PRIVILEGES on *.* to {{ wsrep_sst_username }}@'%';
+FLUSH PRIVILEGES;

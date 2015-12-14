@@ -1,0 +1,14 @@
+#!/bin/bash
+#
+# Secure MariaDB Galera Install
+
+echo -e "\nY\n{{ mariadb_root_pwd }}\n{{ mariadb_root_pwd }}\nY\nY\nY\nY\n" | mysql_secure_installation 2>/dev/null
+
+exit_code=$?
+
+if [[ ${exit_code} != 0 ]]
+  then
+  exit ${exit_code}
+else
+  touch /root/.secure_mariadb_install.completed
+fi

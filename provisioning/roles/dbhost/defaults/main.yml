@@ -3,6 +3,7 @@ swap_location: /swap
 swap_size: 2GB
 nameservers: ['8.8.8.8', '8.8.4.4']
 search_domain: ["example.com"]
+mariadb_root_pwd: mariadb_root_password
 wsrep_cluster_name: mariadb_cluster
 wsrep_sst_username: sst_user
 wsrep_sst_password: password

@@ -7,6 +7,7 @@
   with_items:
     - MariaDB-server
     - MariaDB-client
+    - MySQL-python
   tags:
     - mariadb
 
@@ -33,8 +34,8 @@
 - name: MariaDB - Copy sst_auth setup script
   template: src=setup_sst_auth.sql.j2 dest=/root/setup_scripts/setup_sst_auth.sql mode=0755
 
-- name: MariaDB - Execute sst_auth_setup script
-  command: mysql < /root/setup_scripts/setup_sst_auth.sql
+- name: MariaDB - Import sst_auth script
+  mysql_db: name=mysql state=import target=/root/setup_scripts/setup_sst_auth.sql
 
 - name: MariaDB - Install server configuration file
   when: hostvars[item].ansible_default_ipv4.address is defined

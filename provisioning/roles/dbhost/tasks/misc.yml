@@ -15,3 +15,6 @@
 
 - name: Misc - Upgrade all packages
   yum: name=* state=latest
+
+- name: Misc - Disable NetworkManager
+  service: name=NetworkManager.service enabled=false state=stopped

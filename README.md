@@ -18,6 +18,4 @@ See the [Bootstrapping](docs/bootstrapping.md) documentation.
 
 **TODO**
 
-- Create playbook for `mysql_secure_installation`
-- Create playbook that sets up the sst_user and password
-- Create private network (Digital Ocean) and utilize that instead of eth0
+- [ ] Create private network (Digital Ocean) and utilize that instead of eth0

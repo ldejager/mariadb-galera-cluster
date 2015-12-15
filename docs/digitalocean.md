@@ -1,6 +1,12 @@
 # Digital Ocean
 
-The following defaults exist in the terraform manifests for the Digital Ocean provisioner.
+The steps below explains how to get a MariaDB Galera cluster built on Digital Ocean using `terraform` and `ansible`.
+
+Before you get started, review the terraform manifest below's default values.
+
+```shell
+./providers/digitalocean/hosts/main.tf
+```
 
 ```
 variable cluster_member_count { default = 3 }
@@ -10,13 +16,7 @@ variable image_name { default = "centos-7-0-x64" }
 
 If you wish to override any of these, set the variable in the `terraform.tf` file accordingly. Note that if you have cluster size of less than three, you'll probably need to consider adding a galera arbitrator.
 
-Below is a list of configuration files worth inspecting and adjusting before running the commands below.
-
-```shell
-
-```
-
-The steps below can be used to get started.
+Run the following steps to get started.
 
 - Clone the repository
 ```shell
@@ -67,8 +67,6 @@ db-01 | success >> {
 ansible-playbook -i ~/bin/terraform-inventory provisioning/terraform.yml
 ```
 
-Once the ansible run is completed, you'll have MariaDB installed and somewhat configured but it is not started.
-
-:exclamation: Ansible is set to enable the `mysqld` service, if using CentOS 7 as per defaults in the terraform defintion, double check that either systemd or init is configured to start MariaDB and not both.
+Once the ansible run is completed, you'll have MariaDB installed and configured with the root password set to what you have defined in `provisioning/roles/dbhost/defaults/main.yml`
 
 See the [Bootstrapping](bootstrapping.md) documentation to proceed.

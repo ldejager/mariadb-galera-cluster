@@ -7,6 +7,7 @@ The goal of the repository is to make it as easy as possible for anyone to creat
 Currently, I'm aiming to have the installation support the following list of providers.
 
 - [x] Digital Ocean
+- [ ] GCE
 - [ ] AWS
 - [ ] OpenStack
 
@@ -26,6 +27,6 @@ provisioning/roles/dbhost/defaults/main.yml
 
 Once the MariaDB Galera cluster has been created, you'll need to bootstrap the cluster by following the [Bootstrapping](docs/bootstrapping.md) documentation.
 
-**TODO**
+**TODO / IMPROVEMENTS**
 
 - [ ] Create private network (Digital Ocean) and utilize that instead of eth0

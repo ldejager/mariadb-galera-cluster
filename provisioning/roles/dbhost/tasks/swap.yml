@@ -1,7 +1,7 @@
 ---
 - name: Swap - Allocate swap
   command: |
-    fallocate -l {{ swap_size }} {{ swap_location }} creates={{ swap_location }}
+    dd if=/dev/zero of={{ swap_location }} count={{ swap_size }} bs=1MiB creates={{ swap_location }}
   register: allocate_swap
   when: swap_size != false
 

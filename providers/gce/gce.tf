@@ -31,9 +31,6 @@ resource "google_compute_firewall" "db-firewall-ext" {
     protocol = "tcp"
     ports = [
       "22",   # SSH
-      "873",  # RSync
-      "3306", # MySQL
-      "4567"  # Galera
     ]
   }
 }
@@ -105,6 +102,8 @@ resource "google_compute_instance" "dbcluster-nodes" {
     connection {
       type = "ssh"
       user = "${var.ssh_user}"
+      key_file = "~/.ssh/id_rsa"
+      agent = false
     }
   }
 }

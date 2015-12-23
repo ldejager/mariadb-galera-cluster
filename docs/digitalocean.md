@@ -31,8 +31,7 @@ cd terraform-mariadb-cluster
 cp providers/digitalocean.sample.tf terraform.tf
 ```
 - Provide your token and check that the SSH key path is correct in `terraform.tf`
-- Review the provided `cloud-config.yml` file and make any amendments if required.
-- Run terraform get to download and update the required modules.
+
 ```shell
 terraform get
 ```
@@ -64,7 +63,7 @@ db-01 | success >> {
 
 - If all looks good, proceed to run the ansible playbooks.
 ```shell
-ansible-playbook -i ~/bin/terraform-inventory provisioning/terraform.yml
+ansible-playbook -u root -i ~/bin/terraform-inventory provisioning/terraform.yml
 ```
 
 Once the ansible run is completed, you'll have MariaDB installed and configured with the root password set to what you have defined in `provisioning/roles/dbhost/defaults/main.yml`

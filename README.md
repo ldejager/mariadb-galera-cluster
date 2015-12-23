@@ -9,6 +9,7 @@ Currently, I'm aiming to have the installation support the following list of pro
 - [x] Digital Ocean
 - [ ] AWS
 - [ ] OpenStack
+- [x] GCE
 
 ## Installation
 
@@ -21,6 +22,7 @@ provisioning/roles/dbhost/defaults/main.yml
 ```
 
 - [x] [Digital Ocean Installation Documentation](docs/digitalocean.md)
+- [x] [Google Compute Engine Installation Documentation](docs/gce.md)
 
 ### Bootstrapping
 

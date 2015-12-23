@@ -1,6 +1,6 @@
 ---
 swap_location: /swap
-swap_size: 2GB
+swap_size: 2048
 nameservers: ['8.8.8.8', '8.8.4.4']
 search_domain: ["example.com"]
 mariadb_root_pwd: mariadb_root_password

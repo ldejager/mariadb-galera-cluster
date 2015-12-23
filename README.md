@@ -7,10 +7,9 @@ The goal of the repository is to make it as easy as possible for anyone to creat
 Currently, I'm aiming to have the installation support the following list of providers.
 
 - [x] Digital Ocean
-- [ ] GCE
+- [x] GCE
 - [ ] AWS
 - [ ] OpenStack
-- [x] GCE
 
 ## Installation
 

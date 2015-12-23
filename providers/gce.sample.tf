@@ -1,5 +1,6 @@
 provider "google" {
-  account_file = "${file("account.json")}"
+  credentials = "${file("account.json")}"
+  account_file = "" # Deprecated, use credentials above
   project = ""
   region = ""
 }

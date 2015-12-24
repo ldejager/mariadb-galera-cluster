@@ -23,15 +23,11 @@ provisioning/roles/dbhost/defaults/main.yml
 
 - [x] [Digital Ocean Installation Documentation](docs/digitalocean.md)
 - [x] [Google Compute Engine Installation Documentation](docs/gce.md)
-- [ ] [AWS Installation Documentation](docs/aws.md)
+- [x] [AWS Installation Documentation](docs/aws.md)
 
 ### Bootstrapping
 
 Once the MariaDB Galera cluster has been created, you'll need to bootstrap the cluster by following the [Bootstrapping](docs/bootstrapping.md) documentation.
-
-**TODO / IMPROVEMENTS**
-
-- [ ] Create private network (Digital Ocean) and utilize that instead of the external network interface
 
 ## Contributing
 

@@ -11,7 +11,7 @@ variable "network_subnet_ip4" {default = "10.0.0.0/16"}
 variable "short_name" {default = "db"}
 variable "source_ami" { }
 variable "ssh_key" {default = "~/.ssh/id_rsa.pub"}
-variable "ssh_username"  {default = "centos"}
+variable "ssh_username"  {default = "ec2-user"}
 
 resource "aws_vpc" "main" {
   cidr_block = "${var.network_ipv4}"
@@ -72,7 +72,6 @@ resource "aws_instance" "db" {
   instance_type = "${var.cluster_instance_type}"
   count = "${var.cluster_member_count}"
   vpc_security_group_ids = ["${aws_security_group.db.id}",
-    "${aws_security_group.ui.id}",
     "${aws_vpc.main.default_security_group_id}"]
 
   key_name = "${aws_key_pair.deployer.key_name}"
@@ -97,10 +96,10 @@ resource "aws_instance" "db" {
 }
 
 resource "aws_volume_attachment" "db-lvm-attachment" {
-  count = "${var.control_count}"
+  count = "${var.cluster_member_count}"
   device_name = "xvdh"
-  instance_id = "${element(aws_instance.db-nodes.*.id, count.index)}"
-  volume_id = "${element(aws_ebs_volume.db-lvm.*.id, count.index)}"
+  instance_id = "${element(aws_instance.db.*.id, count.index)}"
+  volume_id = "${element(aws_ebs_volume.cluster-storage.*.id, count.index)}"
   force_detach = true
 }
 

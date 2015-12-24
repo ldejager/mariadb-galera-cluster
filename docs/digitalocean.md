@@ -14,7 +14,7 @@ variable cluster_memory_size { default = "4gb" }
 variable image_name { default = "centos-7-0-x64" }
 ```
 
-If you wish to override any of these, set the variable in the `terraform.tf` file accordingly. Note that if you have cluster size of less than three, you'll probably need to consider adding a galera arbitrator.
+If you wish to override any of these, set the variable in the `digitalocean.tf` file accordingly. Note that if you have cluster size of less than three, you'll probably need to consider adding a galera arbitrator.
 
 Run the following steps to get started.
 
@@ -26,9 +26,9 @@ git clone git@github.com:ldejager/terraform-mariadb-cluster.git
 ```shell
 cd terraform-mariadb-cluster
 ```
-- Copy the sample digitalocean terraform file to `terraform.tf`
+- Copy the sample digitalocean terraform file to `digitalocean.tf`
 ```shell
-cp providers/digitalocean.sample.tf terraform.tf
+cp providers/digitalocean.sample.tf digitalocean.tf
 ```
 - Provide your token and check that the SSH key path is correct in `terraform.tf`
 

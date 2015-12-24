@@ -23,7 +23,14 @@ destroy:
 	$(TERRAFORM) apply terraform.tfplan
 
 deploy:
-	$(ANSIBLE) -v --private-key ~/.ssh/id_rsa -i ~/bin/terraform-inventory provisioning/terraform.yml
+		sleep 10
+ifeq ("$(wildcard $(digitalocean.tf))","")
+		$(ANSIBLE) --private-key ~/.ssh/id_rsa -i ~/bin/terraform-inventory provisioning/terraform.yml
+else ifeq ("$(wildcard $(gce.tf))","")
+		$(ANSIBLE) --sudo -u centos --private-key ~/.ssh/id_rsa -i ~/bin/terraform-inventory provisioning/terraform.yml
+else ifeq ("$(wildcard $(aws.tf))","")
+		$(ANSIBLE) --sudo -u ec2-user --private-key ~/.ssh/id_rsa -i ~/bin/terraform-inventory provisioning/terraform.yml
+endif
 
 clean:
 	rm -f terraform.tfplan

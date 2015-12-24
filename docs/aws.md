@@ -73,7 +73,7 @@ db-01 | success >> {
 ansible-playbook --sudo -u ec2-user -i ~/bin/terraform-inventory provisioning/terraform.yml
 ```
 
-:exclamation: For AWS, the default user for image `` is ec2-user and you need to use sudo when running the playbooks.
+:exclamation: For AWS, the default user for image `ami-1f5dfe6c` is ec2-user and you need to use sudo when running the playbooks.
 
 Once the ansible run is completed, you'll have MariaDB installed and configured with the root password set to what you have defined in `provisioning/roles/dbhost/defaults/main.yml`
 

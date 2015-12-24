@@ -8,7 +8,7 @@ Currently, the installation supports the following list of providers.
 
 - [x] Digital Ocean
 - [x] GCE
-- [ ] AWS
+- [x] AWS
 - [ ] OpenStack
 
 ## Installation

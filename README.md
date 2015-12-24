@@ -4,7 +4,7 @@ MariaDB Galera Cluster deployment with `terraform` for automated infrastructure 
 
 The goal of the repository is to make it as easy as possible for anyone to create a MariaDB Galera cluster on the providers below. If you would like support for any other provider, feel free to create a pull request.
 
-Currently, I'm aiming to have the installation support the following list of providers.
+Currently, the installation supports the following list of providers.
 
 - [x] Digital Ocean
 - [x] GCE
@@ -23,6 +23,7 @@ provisioning/roles/dbhost/defaults/main.yml
 
 - [x] [Digital Ocean Installation Documentation](docs/digitalocean.md)
 - [x] [Google Compute Engine Installation Documentation](docs/gce.md)
+- [ ] [AWS Installation Documentation](docs/aws.md)
 
 ### Bootstrapping
 
@@ -30,4 +31,12 @@ Once the MariaDB Galera cluster has been created, you'll need to bootstrap the c
 
 **TODO / IMPROVEMENTS**
 
-- [ ] Create private network (Digital Ocean) and utilize that instead of eth0
+- [ ] Create private network (Digital Ocean) and utilize that instead of the external network interface
+
+## Contributing
+
+- Fork it (https://github.com/ldejager/mariadb-galera-cluster/fork)
+- Create your feature branch (git checkout -b feature/new_feature)
+- Commit your changes (git commit -am 'Added some new features')
+- Push to the branch (git push origin feature/new_feature)
+- Create a new Pull Request
